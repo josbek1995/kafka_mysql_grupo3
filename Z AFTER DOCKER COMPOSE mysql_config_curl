@@ -1,0 +1,47 @@
+ESTE SOLO DETECTA INSERTS---------curl -X POST http://localhost:8083/connectors -H "Content-Type: application/json" -d '{
+  "name": "mysql-source-connector",
+  "config": {
+    "connector.class": "io.confluent.connect.jdbc.JdbcSourceConnector",
+    "tasks.max": "1",
+    "connection.url": "jdbc:mysql://fake-database-grupo3-1.cfqay6u8sikg.us-east-1.rds.amazonaws.com:3306/bd-grupo-3-v3?useSSL=false&allowPublicKeyRetrieval=true",
+    "connection.user": "admin",
+    "connection.password": "awsrdsgruop3fakerlaboratorio",
+    "table.whitelist": "Stock",
+    "mode": "incrementing",
+    "incrementing.column.name": "id_stock",
+    "topic.prefix": "mysql-",
+    "poll.interval.ms": "10000",
+    "driver.class": "com.mysql.cj.jdbc.Driver"
+  }
+}'---------
+
+
+curl -X POST -H "Content-Type: application/json" \
+     -d @connectors/mysql-source.json \
+     http://localhost:8083/connectors
+
+
+
+curl http://localhost:8083/connectors/mysql-source-connector/status
+
+
+
+
+curl -X POST http://localhost:8083/connectors -H "Content-Type: application/json" -d '{
+  "name": "mysql-source-connector",
+  "config": {
+    "connector.class": "io.confluent.connect.jdbc.JdbcSourceConnector",
+    "tasks.max": "1",
+    "connection.url": "jdbc:mysql://fake-database-grupo3-1.cfqay6u8sikg.us-east-1.rds.amazonaws.com:3306/bd-grupo-3-v3?useSSL=false&allowPublicKeyRetrieval=true",
+    "connection.user": "admin",
+    "connection.password": "awsrdsgruop3fakerlaboratorio",
+    "table.whitelist": "Stock",
+    "mode": "timestamp+incrementing",
+    "incrementing.column.name": "id_stock",
+    "timestamp.column.name": "fecha_actualizacion",
+    "topic.prefix": "mysql-",
+    "poll.interval.ms": "10000",
+    "validate.non.null": "false",
+    "driver.class": "com.mysql.cj.jdbc.Driver"
+}
+}'
