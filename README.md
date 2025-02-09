@@ -47,30 +47,8 @@ Kafka Broker: Confirm that the Kafka broker is running and accessible at localho
 Kafka UI: Visit http://localhost:7777 to view the Kafka cluster.
 Kafka Connect: Ensure Kafka Connect is running at http://localhost:8083.
 
+- The mysql-connector will automatically set up
+- The Topic mysql-Stock will automatically be created
+
 docker-compose up -d
-
-
-### Step 4: Add MySQL Source Connector
-Post the MySQL source connector configuration:
-
-curl -X POST http://localhost:8083/connectors -H "Content-Type: application/json" -d '{
-  "name": "mysql-source-connector",
-  "config": {
-    "connector.class": "io.confluent.connect.jdbc.JdbcSourceConnector",
-    "tasks.max": "1",
-    "connection.url": "jdbc:mysql://fake-database-grupo3-1.cfqay6u8sikg.us-east-1.rds.amazonaws.com:3306/bd-grupo-3-v3?useSSL=false&allowPublicKeyRetrieval=true",
-    "connection.user": "admin",
-    "connection.password": "awsrdsgruop3fakerlaboratorio",
-    "table.whitelist": "Stock",
-    "mode": "timestamp+incrementing",
-    "incrementing.column.name": "id_stock",
-    "timestamp.column.name": "fecha_actualizacion",
-    "topic.prefix": "mysql-",
-    "poll.interval.ms": "10000",
-    "validate.non.null": "false",
-    "driver.class": "com.mysql.cj.jdbc.Driver"
-  }
-}'
-
-
-"ADICIONAL": al hacer el primer docker compose el container 'stock-consumer' se caera, luego de agregar el paso 4 se debe volver a lanzar el docker-compose up -d
+or docker compose up -d

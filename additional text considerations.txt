@@ -45,3 +45,19 @@ curl -X POST http://localhost:8083/connectors -H "Content-Type: application/json
     "driver.class": "com.mysql.cj.jdbc.Driver"
 }
 }'
+
+
+CHECK KAFKA MESSAGES RECEIVED BEFORE CONSUMER CATCH THEM
+🔍 Step 5: Verify If Messages Are Entering Kafka
+If kafka-console-consumer.sh is missing, try using this command:
+
+bash
+Copiar
+Editar
+docker exec -it kafka-1 sh
+Then inside the container:
+
+sh
+Copiar
+Editar
+/opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server kafka-1:19092 --topic mysql-Stock --from-beginning
