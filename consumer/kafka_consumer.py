@@ -10,7 +10,7 @@ POST_URL = "https://utec-arquitecture-streaming-production.up.railway.app/connec
 consumer_config = {
     'bootstrap.servers': 'kafka-1:19092',  # Kafka broker
     'group.id': 'stock-updates-consumer',
-    'auto.offset.reset': 'lastest'  # Start reading at the end of the topic
+    'auto.offset.reset': 'latest'  # Start reading at the end of the topic
 }
 
 # Topic name
