@@ -75,7 +75,8 @@ def consume_messages():
 
                 payload = {
                     "id": str(message_data.get("id_stock")),
-                    "stock": message_data.get("stock_actual")
+                    "stock": message_data.get("stock_actual"),
+                    "fecha_actualizacion" : str(message_data.get("fecha_actualizacion"))
                 }
                 print(f"📦 Parsed message2: {payload}")
                 # Send the POST request
